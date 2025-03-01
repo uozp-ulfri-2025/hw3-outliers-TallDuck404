@@ -52,12 +52,12 @@ def read_data(path):
     """
     ans = {}
     for i in os.listdir(path):
-        if os.path.isdir(path + '\\' + i):
+        if os.path.isdir(path + '/' + i):
             ans.update(read_data(path + '/' + i))
             continue
         if i.endswith('.jpg') or i.endswith('.png'):
             #print(i)
-            picture = embed(path +'\\' + i)
+            picture = embed(path +'/' + i)
             ans[path +'/' + i] = picture
     return ans
     raise NotImplementedError()
