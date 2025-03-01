@@ -1,4 +1,3 @@
-from sklearn.metrics import euclidean_distances
 from math import isnan
 import torch
 from PIL import Image
