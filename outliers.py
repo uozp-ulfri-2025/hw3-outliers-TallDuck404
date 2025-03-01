@@ -45,20 +45,24 @@ def embed(fn):
     raise NotImplementedError()
 
 
-def read_data(path):
+def read_data(path, root=""):
     """
     Preberi vse slike v podani poti, jih pretvori v "embedding" in vrni rezultat
     kot slovar, kjer so ključi imena slik, vrednosti pa pripadajoči vektorji.
     """
     ans = {}
     for i in os.listdir(path):
-        if os.path.isdir(path + '/' + i):
-            ans.update(read_data(path + '/' + i))
+        full_path = os.path.join(path, i)
+        if root == "":
+            relative_path = i
+        else:
+            relative_path = root + "/" + i
+        if os.path.isdir(full_path):
+            ans.update(read_data(full_path, relative_path))
             continue
         if i.endswith('.jpg') or i.endswith('.png'):
-            #print(i)
-            picture = embed(path +'/' + i)
-            ans[path +'/' + i] = picture
+            picture = embed(full_path)
+            ans[relative_path] = picture
     return ans
     raise NotImplementedError()
 
